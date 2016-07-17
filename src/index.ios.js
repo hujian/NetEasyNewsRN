@@ -23,11 +23,14 @@ class NetEasyNewsRN extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>{news.title}</Text>
-        <Text>{news.date}</Text>
         <Image 
           source={{uri:news.thumbnail}}
           style={styles.thumbnail}/>
+
+        <View style={styles.rightContainer}>
+          <Text>{news.title}</Text>
+          <Text>{news.date}</Text>
+        </View>
       </View>
     );
   }
@@ -39,6 +42,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  rightContainer: {
+    flex: 1
   },
   thumbnail: {
     width: 53,
