@@ -1,0 +1,3 @@
+rootProject.name = 'NetEasyNewsRN'
+
+include ':app'
