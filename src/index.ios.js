@@ -9,6 +9,6 @@ import {
   AppRegistry,
 } from 'react-native';
 
-var tabBar = require('./application/src/TabBarViewController')
+import TabBar from './application/src/TabBarViewController'
 
-AppRegistry.registerComponent('NetEasyNewsRN', () => tabBar);
+AppRegistry.registerComponent('NetEasyNewsRN', () => TabBar);

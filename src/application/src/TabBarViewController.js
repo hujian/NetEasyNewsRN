@@ -5,7 +5,7 @@
  */
 'use strict';
 
-import React from 'react'
+import React, {Component} from 'react'
 
 import {
 	View,
@@ -32,14 +32,15 @@ const styles = {
 		justifyContent: 'center',
 		alignItems: 'center',
 	}
-}
+};
 
-const TabbarViewController = React.createClass({
-	getInitialState() {
-		return {
+export default class TabBarViewController extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
 			selectedTab: 'news',
 		}
-	},
+	};
 
 	render() {
 		return (
@@ -118,7 +119,5 @@ const TabbarViewController = React.createClass({
 
 			</TabBarIOS>
 		)
-	},
-});
-
-module.exports = TabbarViewController
+	};
+};
