@@ -6,6 +6,7 @@
 'use strict';
 
 import React, {Component} from 'react'
+import NewsViewController from './NewsViewController'
 
 import {
 	View,
@@ -31,6 +32,8 @@ const styles = {
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
+		marginTop: 20,
+		marginBottom: 49,
 	}
 };
 
@@ -62,7 +65,7 @@ export default class TabBarViewController extends Component {
 					}
 				>
 					<View style = {styles.contentContainer}>
-						<Text>新闻</Text>
+						<NewsViewController/>
 					</View>
 				</TabBarIOS.Item>
 

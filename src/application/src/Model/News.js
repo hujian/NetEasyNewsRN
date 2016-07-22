@@ -1,11 +1,11 @@
 /**
- * @brief:  入口 
+ * @brief:  新闻模块的model
  * @author: hj
  * @date:   2016-07-20
  */
 'use strict';
 
-import React, {component} from 'react';
+import React, {Component} from 'react';
 
 const BASE_URL = 'http://c.m.163.com';
 
@@ -54,12 +54,12 @@ const NEWS_URLS = [
 
 export default class News extends Component {
 	constructor(props) {
-
+		super(props)
 	};
 
 	getListURL(index, fromIndex, count) {
-		newsConfig = NEWS_URLS[index];
-		return BASE_URL + '/nc/article/' + newsConfig[index] + '/' + fromIndex + 1 + '-' + fromIndex + 1 + count + '.html';
+		var newsConfig = NEWS_URLS[index];
+		return BASE_URL + '/nc/article/' + newsConfig.urlString + '/' + fromIndex + '-' + count + '.html';
 	};
 
 	getListTitle(index) {
