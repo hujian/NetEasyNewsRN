@@ -95,13 +95,15 @@ export default class NewsVeiwController extends Component {
 		}
 
 		return (
-			<ListView
-				dataSource = {this.state.dataSource}
-				renderRow = {this.renderRow}
-				renderSeparator = {this.renderSeperator}
-				style = {styles.style}
-			>
-			</ListView>
+			<Navigator>
+				<ListView
+					dataSource = {this.state.dataSource}
+					renderRow = {this.renderRow}
+					renderSeparator = {this.renderSeperator}
+					style = {styles.style}
+				>
+				</ListView>
+			</Navigator>
 		)
 	};
 };
