@@ -62,6 +62,10 @@ export default class News extends Component {
 		return BASE_URL + '/nc/article/' + newsConfig.urlString + '/' + fromIndex + '-' + count + '.html';
 	};
 
+	getNewsDetailURL(docID) {
+		return BASE_URL + '/nc/article/' + docID + '/full.html';
+	};
+
 	getListTitle(index) {
 		return NEWS_URLS[index].title;
 	};

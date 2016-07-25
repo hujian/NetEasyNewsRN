@@ -41,7 +41,6 @@ export default class NewsListPage extends Component {
 
 	getURL() {
 		var url = this.state.news.getListURL(0, 0, 20);
-		console.log(url);
 		return url; 
 	}
 
@@ -56,9 +55,9 @@ export default class NewsListPage extends Component {
 				this.setState({
 					dataSource: this.state.dataSource.cloneWithRows(responseData),
 					loaded: true,
-				})
+				});
 			})
-			.done()
+			.done();
 	}
 
 	renderLoadingView() {
@@ -75,7 +74,8 @@ export default class NewsListPage extends Component {
 			navigator.push({
 				name: '',
 				component: NewsDetailPage,
-				params: rowData,
+				params: {url: this.state.news.getNewsDetailURL(rowData.docid),
+						 docid: rowData.docid},
 			});
 		}
 	}

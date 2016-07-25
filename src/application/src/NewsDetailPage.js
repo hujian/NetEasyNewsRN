@@ -10,18 +10,52 @@ import {
 	View,
 	Text,
 	Image,
+	WebView,
 } from 'react-native';
 
 export default class NewsDetailPage extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			loaded: false
+		}
+	}
+
+	componentWillMount() {
+		this.fetchData();
+	}
+
+	fetchData() {
+		fetch(this.props.url)
+			.then((response) => response.text())
+			.then((responseData) => {
+				var content = responseData[this.props.docid];
+				this.setState({
+					loaded: true,
+					content: content,
+				});
+			})
+			.catch((error) => {
+				console.warn(error);
+			});
 	}
 
 	render() {
+		if (!this.state.loaded) {
+			return (
+				<View>
+					<Text>
+						加载中...
+					</Text>
+				</View>
+			);
+		}
+
 		return (
-			<View>
-				<Text>{this.props.title}</Text>
-			</View>
-		)
+			<WebView 
+				source = {this.state.content}
+			/>
+		);
 	}
 };
