@@ -11,16 +11,18 @@ import {
 	Text,
 	Image,
 	ListView,
+	TouchableHighlight,
 } from 'react-native'
 import News from './Model/News'
 import NewsCell from './View/NewsCell'
+import NewsDetailPage from './NewsDetailPage'
 
 const styles = {
 	content: {
 	},
 }
 
-export default class NewsVeiwController extends Component {
+export default class NewsListPage extends Component {
 	constructor(props) {
 		super(props);
 
@@ -31,15 +33,17 @@ export default class NewsVeiwController extends Component {
 			loaded: false,
 			news: new News()
 		};
-	};
+	}
 
 	componentDidMount() {
 		this.fetchData()
-	};
+	}
 
 	getURL() {
-		return this.state.news.getListURL(0, 0, 20);
-	};
+		var url = this.state.news.getListURL(0, 0, 20);
+		console.log(url);
+		return url; 
+	}
 
 	fetchData() {
 		fetch(this.getURL())
@@ -55,7 +59,7 @@ export default class NewsVeiwController extends Component {
 				})
 			})
 			.done()
-	};
+	}
 
 	renderLoadingView() {
 		return (
@@ -63,16 +67,31 @@ export default class NewsVeiwController extends Component {
 				<Text>加载中...</Text>
 			</View>
 		)
-	};
+	}
 
-	renderRow(newsData) {
+	pressRow(rowData, sectionID, rowID) {
+		var {navigator} = this.props;
+		if (navigator) {
+			navigator.push({
+				name: '',
+				component: NewsDetailPage,
+				params: rowData,
+			});
+		}
+	}
+
+	renderRow(newsData, sectionID, rowID) {
 		return (
-			<NewsCell
-				model = {newsData}
+			<TouchableHighlight
+				onPress = {() => this.pressRow(newsData, sectionID, rowID)}
+				underlayColor = '#dbdbdb'
 			>
-			</NewsCell>
+				<View>
+					<NewsCell model = {newsData}/>
+				</View>
+			</TouchableHighlight>
 		);
-	};
+	}
 
     renderSeperator(sectionID, rowID, adjacentRowHighlighted) {
 	    return (
@@ -83,7 +102,7 @@ export default class NewsVeiwController extends Component {
 		          	backgroundColor: '#f7f8f9',
 		          	marginRight: 4,
 	        	}}
-	      />
+	        />
 	    );
 	}
 
@@ -95,15 +114,13 @@ export default class NewsVeiwController extends Component {
 		}
 
 		return (
-			<Navigator>
-				<ListView
-					dataSource = {this.state.dataSource}
-					renderRow = {this.renderRow}
-					renderSeparator = {this.renderSeperator}
-					style = {styles.style}
-				>
-				</ListView>
-			</Navigator>
+			<ListView
+				dataSource = {this.state.dataSource}
+				renderRow = {this.renderRow.bind(this)}
+				renderSeparator = {this.renderSeperator}
+				style = {styles.style}
+			>
+			</ListView>
 		)
 	};
 };
