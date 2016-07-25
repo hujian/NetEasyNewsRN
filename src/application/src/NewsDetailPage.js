@@ -30,7 +30,11 @@ export default class NewsDetailPage extends Component {
 		fetch(this.props.url)
 			.then((response) => response.text())
 			.then((responseData) => {
-				var content = responseData[this.props.docid];
+				var content = '';
+				for (var key in responseData) {
+					content = responseData[key];
+					break;
+				}
 				this.setState({
 					loaded: true,
 					content: content,
