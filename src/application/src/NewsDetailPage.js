@@ -28,11 +28,11 @@ export default class NewsDetailPage extends Component {
 
 	fetchData() {
 		fetch(this.props.url)
-			.then((response) => response.text())
+			.then((response) => response.json())
 			.then((responseData) => {
 				var content = '';
 				for (var key in responseData) {
-					content = responseData[key];
+					content = responseData[key]['body'];
 					break;
 				}
 				this.setState({
@@ -56,9 +56,10 @@ export default class NewsDetailPage extends Component {
 			);
 		}
 
+		console.log(this.state.content);
 		return (
 			<WebView 
-				source = {this.state.content}
+				source = {{html: this.state.content}}
 			/>
 		);
 	}
