@@ -2,6 +2,8 @@
 
 基于reactive native的网易新闻客户端练手项目。
 
+![sceen_0](./doc/screen_0.png)
+
 ## Todo list
 
 1. [ ] 新闻
