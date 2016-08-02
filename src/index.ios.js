@@ -9,23 +9,32 @@ import React, {Component} from 'react';
 import {
   AppRegistry,
   Navigator,
+  View
 } from 'react-native';
 
 import SplashPage from './application/src/SplashPage'
+import TestPage from './application/src/Test/TestPage'
+
+
+const DEBUG = true;
 
 class NewsApp extends Component {
 	render() {
-		let defaultName = 'splash';
-		let defaultComponet = SplashPage;
-		return (
-			<Navigator
-				initialRoute = {{name: defaultName, component: defaultComponet}}
-				renderScene = {(route, navigator) => {
-					let Component = route.component;
-					return <Component {...route.params} navigator = {navigator}/>
-				}} 
-			/>
-		);
+		if (DEBUG) {
+			return <TestPage/>
+		} else {
+			let defaultName = 'splash';
+			let defaultComponet = SplashPage;
+			return (
+				<Navigator
+					initialRoute = {{name: defaultName, component: defaultComponet}}
+					renderScene = {(route, navigator) => {
+						let Component = route.component;
+						return <Component {...route.params} navigator = {navigator}/>
+					}} 
+				/>
+			);
+		}
 	}
 };
 

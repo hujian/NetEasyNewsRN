@@ -82,7 +82,7 @@ export default class TopNewsCell extends Component {
 					})
 				}
 			</Swiper>
-			
+
 		return this.state.swiper;
 	}
 };

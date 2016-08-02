@@ -55,18 +55,22 @@ const NEWS_URLS = [
 export default class News extends Component {
 	constructor(props) {
 		super(props);
-	};
+	}
 
 	getListURL(index, fromIndex, count) {
 		var newsConfig = NEWS_URLS[index];
 		return BASE_URL + '/nc/article/' + newsConfig.urlString + '/' + fromIndex + '-' + count + '.html';
-	};
+	}
 
 	getNewsDetailURL(docID) {
 		return BASE_URL + '/nc/article/' + docID + '/full.html';
-	};
+	}
 
 	getListTitle(index) {
 		return NEWS_URLS[index].title;
-	};
+	}
+
+	getAllChannel() {
+		return NEWS_URLS;
+	}
 };
