@@ -56,7 +56,6 @@ export default class NewsDetailPage extends Component {
 			);
 		}
 
-		console.log(this.state.content);
 		return (
 			<WebView 
 				source = {{html: this.state.content}}

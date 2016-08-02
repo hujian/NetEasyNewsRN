@@ -15,6 +15,6 @@ export default class MeViewController extends Component {
 	render() {
 		return (
 			<Text>我</Text>
-		)
+		);
 	}
 };

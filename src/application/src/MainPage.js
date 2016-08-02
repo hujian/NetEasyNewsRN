@@ -13,6 +13,7 @@ import {
 	StyleSheet,
 	TabBarIOS,
 	TouchableOpacity,
+	StatusBar,
 } from 'react-native';
 
 import NewsListPage from './NewsListPage';
@@ -109,13 +110,14 @@ export default class MainPage extends Component {
 				initialRoute = {{component: component, name: title}}
 				configureScene = {
 					(route) => {
-						return Navigator.SceneConfigs.HorizontalSwipeJump;
+						return Navigator.SceneConfigs.PushFromRight;
 					}
 				}
 				renderScene = {(route, navigator) => {
 					let Component = route.component;
 					return (
 						<View style = {styles.contentContainer}>
+							<StatusBar barStyle = 'light-content'></StatusBar>
 							<Component {...route.params} navigator = {navigator}/>
 						</View>
 					);

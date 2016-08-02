@@ -50,11 +50,11 @@ const NEWS_URLS = [
 		'urlString': 'list/T1348649580692',
 		'replyUrl': 'tech_bbs',
 	},
-]
+];
 
 export default class News extends Component {
 	constructor(props) {
-		super(props)
+		super(props);
 	};
 
 	getListURL(index, fromIndex, count) {

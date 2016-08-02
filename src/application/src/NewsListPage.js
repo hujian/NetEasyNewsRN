@@ -15,11 +15,15 @@ import {
 } from 'react-native'
 import News from './Model/News'
 import NewsCell from './View/NewsCell'
+import TopNewsCell from './View/TopNewsCell'
 import NewsDetailPage from './NewsDetailPage'
 
 const styles = {
 	content: {
 	},
+	listView: {
+		flex: 1,
+	}
 }
 
 export default class NewsListPage extends Component {
@@ -36,7 +40,7 @@ export default class NewsListPage extends Component {
 	}
 
 	componentDidMount() {
-		this.fetchData()
+		this.fetchData();
 	}
 
 	getURL() {
@@ -69,28 +73,39 @@ export default class NewsListPage extends Component {
 	}
 
 	pressRow(rowData, sectionID, rowID) {
-		var {navigator} = this.props;
-		if (navigator) {
-			navigator.push({
-				name: '',
-				component: NewsDetailPage,
-				params: {url: this.state.news.getNewsDetailURL(rowData.docid),
-						 docid: rowData.docid},
-			});
+		if (rowID == 0) {
+		} else {
+			var {navigator} = this.props;
+			if (navigator) {
+				navigator.push({
+					name: '',
+					component: NewsDetailPage,
+					params: {url: this.state.news.getNewsDetailURL(rowData.docid),
+							 docid: rowData.docid},
+				});
+			}
 		}
 	}
 
 	renderRow(newsData, sectionID, rowID) {
-		return (
-			<TouchableHighlight
-				onPress = {() => this.pressRow(newsData, sectionID, rowID)}
-				underlayColor = '#dbdbdb'
-			>
+		if (rowID == 0) {
+			return (
 				<View>
-					<NewsCell model = {newsData}/>
+					<TopNewsCell model = {newsData} sectionID = {sectionID} rowID = {rowID}/>
 				</View>
-			</TouchableHighlight>
-		);
+			)
+		} else {
+			return (
+				<TouchableHighlight
+					onPress = {() => this.pressRow(newsData, sectionID, rowID)}
+					underlayColor = '#dbdbdb'
+				>
+					<View>
+						<NewsCell model = {newsData}/>
+					</View>
+				</TouchableHighlight>
+			)
+		}
 	}
 
     renderSeperator(sectionID, rowID, adjacentRowHighlighted) {
@@ -110,7 +125,7 @@ export default class NewsListPage extends Component {
 		if (!this.state.loaded) {
 			return (
 				this.renderLoadingView()
-			)
+			);
 		}
 
 		return (
@@ -118,9 +133,9 @@ export default class NewsListPage extends Component {
 				dataSource = {this.state.dataSource}
 				renderRow = {this.renderRow.bind(this)}
 				renderSeparator = {this.renderSeperator}
-				style = {styles.style}
+				style = {styles.listView}
 			>
 			</ListView>
-		)
+		);
 	};
 };
