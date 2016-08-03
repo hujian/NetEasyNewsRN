@@ -9,16 +9,24 @@ import React, {Component} from 'react';
 import {
     Text,
     View,
-    ListView
+    ListView,
+    TouchableHighlight,
 } from 'react-native';
+import MainPage from '../MainPage';
+import TestWidgetPage from './TestWidgetPage';
 
 const style = {
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 40,
+    },
+    row: {
+        flex: 1,
+        height: 30,
     }
-}
+};
 
 export default class TestPage extends Component {
     constructor(props) {
@@ -33,18 +41,48 @@ export default class TestPage extends Component {
         this.state = {
             dataSource: ds.cloneWithRows(titles)
         };
+
+        this.pressRow(0, 1);
     }
 
-    pressRow(rowData, sectionID, rowID) {
+    pressRow(sectionID, rowID) {
+        var {navigator} = this.props;
+        var component;
+
+        if (rowID == '0') {
+            component = MainPage;
+        } else if (rowID == '1') {
+            component = TestWidgetPage;
+        }
+
+        navigator.push({
+            name: '',
+            component: component,
+        });
     }
 
     renderRow(rowData, sectionID, rowID) {
         return (
             <TouchableHighlight
-                onPress = {() => this.pressRow(rowData, sectionID, rowID)}
+                onPress = {(() => this.pressRow(sectionID, rowID)).bind(this)}
+                underlayColor = '#dbdbdb'
             >
-                <Text>{rowData}</Text>
+                <Text style = {style.row}>{rowData}</Text>
             </TouchableHighlight>
+        )
+    }
+
+    renderSeparator(rowID, sectionID, adjacentRowHighlighted) {
+        return (
+            <View
+                key = {`${sectionID}-${rowID}`}
+                style = {{
+                    height: 0.5,
+                    backgroundColor: '#f7f8f9', 
+                    marginRight: 4,
+                }}
+            >
+            </View>
         )
     }
 
@@ -54,6 +92,7 @@ export default class TestPage extends Component {
                 <ListView
                     dataSource = {this.state.dataSource}
                     renderRow = {this.renderRow.bind(this)} 
+                    renderSeparator = {this.renderSeparator}
                 >
                 </ListView>
             </View>

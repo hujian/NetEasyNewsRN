@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-import SplashPage from './application/src/SplashPage'
+import MainPage from './application/src/MainPage'
 import TestPage from './application/src/Test/TestPage'
 
 
@@ -20,21 +20,23 @@ const DEBUG = true;
 
 class NewsApp extends Component {
 	render() {
+		let defaultName = 'MainPage';
+		let defaultComponet = MainPage;
+
 		if (DEBUG) {
-			return <TestPage/>
-		} else {
-			let defaultName = 'splash';
-			let defaultComponet = SplashPage;
-			return (
-				<Navigator
-					initialRoute = {{name: defaultName, component: defaultComponet}}
-					renderScene = {(route, navigator) => {
-						let Component = route.component;
-						return <Component {...route.params} navigator = {navigator}/>
-					}} 
-				/>
-			);
+			defaultName = 'test';
+			defaultComponet = TestPage;
 		}
+
+		return (
+			<Navigator
+				initialRoute = {{name: defaultName, component: defaultComponet}}
+				renderScene = {(route, navigator) => {
+					let Component = route.component;
+					return <Component {...route.params} navigator = {navigator}/>
+				}} 
+			/>
+		);
 	}
 };
 
